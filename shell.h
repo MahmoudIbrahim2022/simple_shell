@@ -81,7 +81,7 @@ typedef struct liststr
 
 typedef struct passinfo
 {
-	char *argv;
+	char *arg;
 	char **argv;
 	char *path;
 	int argc;
@@ -141,16 +141,16 @@ int loophsh(char **);
 
 
 /* err_string_functions.c */
-void _eputs(char *);
-int _eputchar(ch);
+void _eputs(char *c);
+int _eputchar(char c);
 int _putfd(char c,int fd);
 int _putsfd(char *str, int fd);
 
 /* string_functions1.c */
-int _strlen(char *);
-int _strcmp(char *, char *);
-char *starts_with(const char *, const char *);
-char *_strcat(char *,char *);
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
+char *starts_with(const char *haystack, const char *needle);
+char *_strcat(char *dest,char *src);
  
 /* string_functions2.c */
 char *_strcpy(char *,char *);
