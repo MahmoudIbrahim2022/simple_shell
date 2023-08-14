@@ -41,14 +41,14 @@ extern char **environ;
 
 
 /**
- *struct builin - contains a builtin string and related function
+ *struct liststr - contains a builtin string and related function
  *@num: the number field
  *@str: a string
  *@next: points to the next node
  */
 
 typedef struct liststr
-{ 
+{
 	int num;
 	char *str;
 	struct liststr *next;
@@ -57,14 +57,14 @@ typedef struct liststr
 
 /**
  *struct passinfo - contains pseudo-arguments to pass into a function,
-  allowing uniform prototype for function pointer struct
+ * allowing uniform prototype for function pointer struct
  *
  *@arg: A string generated from getline containing arguments
  *@argv: an array of strings generated from arg
  *@path: a string path for the current command
  *@argc: the argument count
  *@line_count: the error count
- *@error_num: the error code for exit()s
+ *@err_num: the error code for exit()s
  *@linecount_flag: if on count this line of input
  *@fname: the program file name
  *@env: Linked List local copy of environ
@@ -74,7 +74,7 @@ typedef struct liststr
  *@env_changed: on iif environ was changed
  *@status: the return status of the last executed command
  *@cmd_buf: address of pointer to cmd_buf, on if chaining
- *@cmd_buf_type: CMD_type ||, &&, ; 
+ *@cmd_buf_type: CMD_type ||, &&, ;
  *@readfd: the fd from which to read line input
  *@histcount: The history line number count
  */
@@ -107,10 +107,10 @@ typedef struct passinfo
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-     0, 0, 0}
+0, 0, 0}
 
 /**
- *struct builin - contains a builtin string and related function
+ *struct builtin - contains a builtin string and related function
  *
  *@type: the builtin command flag
  *@func: the function
@@ -129,12 +129,12 @@ typedef struct builtin
 int hsh(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
-void fork_cmd(info_t *); 
+void fork_cmd(info_t *);
 
 /* path.c */
 int is_cmd(info_t *, char *);
 char *dup_chars(char *, int, int);
-char *find_path(info_t *, char *,char *);
+char *find_path(info_t *, char *, char *);
 
 /* loophsh.c */
 int loophsh(char **);
@@ -143,17 +143,17 @@ int loophsh(char **);
 /* err_string_functions.c */
 void _eputs(char *c);
 int _eputchar(char c);
-int _putfd(char c,int fd);
+int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
 
 /* string_functions1.c */
 int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
 char *starts_with(const char *haystack, const char *needle);
-char *_strcat(char *dest,char *src);
- 
+char *_strcat(char *dest, char *src);
+
 /* string_functions2.c */
-char *_strcpy(char *,char *);
+char *_strcpy(char *, char *);
 char *_strdup(const char *);
 void _puts(char *);
 int _putchar(char);
@@ -225,7 +225,8 @@ int _setenv(info_t *, char *, char *);
 char *get_history_file(info_t *info);
 int write_history(info_t *info);
 int read_history(info_t *info);
-int build_history_list(info_t *info);
+int build_history_list(info_t *info, char *buf, int linecount);
+int renumber_history(info_t *info);
 
 /* liststr1.c module */
 list_t *add_node(list_t **, const char *, int);
@@ -243,7 +244,7 @@ ssize_t get_node_index(list_t *, list_t *);
 
 /* chain.c */
 int is_chain(info_t *, char *, size_t *);
-void check_chain(info_t *, char *, size_t , size_t );
+void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
