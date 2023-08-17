@@ -140,7 +140,7 @@ char *find_path(info_t *, char *, char *);
 int loophsh(char **);
 
 
-/* err_string_functions.c */
+/* error_functions.c */
 void _eputs(char *c);
 int _eputchar(char c);
 int _putfd(char c, int fd);
