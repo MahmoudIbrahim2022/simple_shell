@@ -40,7 +40,7 @@ void ffree(char **pp)
  * @old_size: Size of the previous block in bytes.
  * @new_size: Size of the new block in bytes.
  * Return: Returns a pointer to the modified block.
- */ 
+ */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	char *p;
@@ -65,4 +65,21 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	free(ptr);
 
 	return (p);
+}
+
+/**
+ * bfree - Frees a pointer and sets the address to NULL.
+ * @ptr: Address of the pointer to free.
+ * Return: Returns 1 if successfully freed, otherwise 0.
+ */
+int bfree(void **ptr)
+{
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+		return (1);
+	}
+
+	return (0);
 }
