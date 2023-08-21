@@ -2,42 +2,42 @@
 
 /**
  * _myexit - exits the shell
- * @info: The parameters Struct
+ * @param: The parameters Struct
  *
  * Return: exits with a given exit status
- *		(0) if info.argv[0] != "exit
+ *		(0) if param.argv[0] != "exit
  */
 
-int _myexit(info_t *info)
+int _myexit(param_t *param)
 {
 	int exitcheck;
 
-	if (info->argv[1]) /* if there is an exit argument */
+	if (param->argv[1]) /* if there is an exit argument */
 	{
-		exitcheck = _erratoi(info->argv[1]);
+		exitcheck = _erratoi(param->argv[1]);
 		if (exitcheck == -1) /* convert error */
 		{
-			info->status = 2;
-			print_error(info, "Illegal number: ");
-			_eputs(info->argv[1]);
+			param->status = 2;
+			print_error(param, "Illegal number: ");
+			_eputs(param->argv[1]);
 			_eputchar('\n');
 			return (1);
 		}
-		info->err_num = _erratoi(info->argv[1]);
+		param->err_num = _erratoi(param->argv[1]);
 		return (-2);
 	}
-	info->err_num = -1;
+	param->err_num = -1;
 	return (-2);
 }
 
 /**
  * _mycd - changes the current directory of the process
- * @info: The parameters Struct
+ * @param: The parameters Struct
  *
  * Return: Always 0
  */
 
-int _mycd(info_t *info)
+int _mycd(param_t *param)
 {
 	char *s, *dir, buffer[1024];
 	int chdir_ret;
@@ -45,52 +45,52 @@ int _mycd(info_t *info)
 	s = getcwd(buffer, 1024);
 	if (!s)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
-	if (!info->argv[1])
+	if (!param->argv[1])
 	{
-		dir = _getenv(info, "Home=");
+		dir = _getenv(param, "Home=");
 		if (!dir)
-			chdir_ret = chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
+			chdir_ret = chdir((dir = _getenv(param, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
 	}
-	else if (_strcmp(info->argv[1], "-") == 0)
+	else if (_strcmp(param->argv[1], "-") == 0)
 	{
-		if (!_getenv(info, "OLDPWD="))
+		if (!_getenv(param, "OLDPWD="))
 		{
 			_puts(s);
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
-		chdir_ret = chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
+		_puts(_getenv(param, "OLDPWD=")), _putchar('\n');
+		chdir_ret = chdir((dir = _getenv(param, "OLDPWD=")) ? dir : "/");
 	}
 
 	else
-		chdir_ret = chdir(info->argv[1]);
+		chdir_ret = chdir(param->argv[1]);
 	if (chdir_ret == -1)
 	{
-		print_error(info, "can't cd to ");
-		_eputs(info->argv[1]), _putchar('\n');
+		print_error(param, "can't cd to ");
+		_eputs(param->argv[1]), _putchar('\n');
 	}
 	else
 	{
-		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
-		_setenv(info, "PWD", getcwd(buffer, 1024));
+		_setenv(param, "OLDPWD", _getenv(param, "PWD="));
+		_setenv(param, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
 }
 
 /**
  * _myhelp - changes the current directory of the process
- * @info: The parameters Struct
+ * @param: The parameters Struct
  *
  * Return: Always 0
  */
-int _myhelp(info_t *info)
+int _myhelp(param_t *param)
 {
 	char **arg_array;
 
-	arg_array = info->argv;
+	arg_array = param->argv;
 	_puts("help call works. Function not yet implemented \n");
 	if (0)
 		_puts(*arg_array); /* temp att_unused workaround */
