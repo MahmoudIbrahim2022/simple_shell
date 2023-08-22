@@ -168,7 +168,6 @@ int bfree(void **);
 /* more_functions1.c */
 int interactive(param_t *);
 int is_delim(char, char *);
-int _isalpha(int);
 
 /* more_functions2.c */
 int _erratoi(char *);

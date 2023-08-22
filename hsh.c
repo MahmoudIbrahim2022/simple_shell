@@ -1,6 +1,16 @@
 #include "shell.h"
 
 /**
+ * interactive - returns true if shell is interactive mode
+ * @param: struct address
+ * Return: 1 if interactive mode, 0 otherwise
+ */
+int interactive(param_t *param)
+{
+	return (isatty(STDIN_FILENO) && param->readfd <= 2);
+}
+
+/**
  * shell_loop - main shell loop
  * @param: The parameters Struct
  * @av: argument values
