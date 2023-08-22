@@ -117,10 +117,10 @@ typedef struct passparam
 
 typedef struct builtin
 {
-	char *type;
+	char *cmd;
 	int (*func)(param_t *);
 
-} builtin_table;
+} builtin_cmd_table;
 
 
 
@@ -180,7 +180,6 @@ void remove_comments(char *);
 /* builtin_emulators1.c */
 int _myexit(param_t *);
 int _mycd(param_t *);
-int _myhelp(param_t *);
 
 /* builtin_emulators2.c */
 int _myhistory(param_t *);

@@ -75,8 +75,8 @@ void _puts(char *str)
  * _putchar - writes the character c to stdout
  * @c: The character to print
  *
- * Return: 1 if success. if error, -1 is returned,
- * and errno is set appropriately.
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
 int _putchar(char c)
 {
@@ -88,9 +88,7 @@ int _putchar(char c)
 		write(1, buf, i);
 		i = 0;
 	}
-
 	if (c != BUF_FLUSH)
 		buf[i++] = c;
-
 	return (1);
 }

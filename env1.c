@@ -80,7 +80,7 @@ int _myunsetenv(param_t *param)
 }
 
 /**
- * populate_env_list - populates env linked list
+ * populate_env_list - Copy global env vars from environ to env linked list
  * @param: The parameters Struct
  *
  * Return: Always 0

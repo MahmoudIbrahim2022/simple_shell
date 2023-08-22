@@ -57,10 +57,9 @@ int shell_loop(param_t *param, char **av)
 int find_builtin(param_t *param)
 {
 	int i, built_in_ret = -1;
-	builtin_table builtintbl[] = {
+	builtin_cmd_table cmd_table[] = {
 		{"exit", _myexit},
 		{"env", _myenv},
-		{"help", _myhelp},
 		{"history", _myhistory},
 		{"setenv", _mysetenv},
 		{"unsetenv", _myunsetenv},
@@ -69,12 +68,12 @@ int find_builtin(param_t *param)
 		{NULL, NULL}
 	};
 
-	for (i = 0; builtintbl[i].type; i++)
+	for (i = 0; cmd_table[i].cmd; i++)
 	{
-		if (_strcmp(param->argv[0], builtintbl[i].type) == 0)
+		if (_strcmp(param->argv[0], cmd_table[i].cmd) == 0)
 		{
 			param->line_count++;
-			built_in_ret = builtintbl[i].func(param);
+			built_in_ret = cmd_table[i].func(param);
 			break;
 		}
 	}
