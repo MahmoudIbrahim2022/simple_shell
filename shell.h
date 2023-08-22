@@ -111,7 +111,7 @@ typedef struct passparam
 /**
  *struct builtin - contains a builtin string and related function
  *
- *@type: the builtin command flag
+ *@cmd: the builtin command flag
  *@func: the function
  */
 
