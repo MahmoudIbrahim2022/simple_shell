@@ -125,6 +125,7 @@ typedef struct builtin
 
 
 /* hsh.c */
+int interactive(param_t *);
 int shell_loop(param_t *, char **);
 int find_builtin(param_t *);
 void find_external(param_t *);
@@ -157,6 +158,7 @@ int _putchar(char);
 char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
+int is_delim(char, char *);
 
 /* memory_functions.c */
 char *_memset(char *, char, unsigned int);
@@ -164,12 +166,7 @@ void ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
 int bfree(void **);
 
-
-/* more_functions1.c */
-int interactive(param_t *);
-int is_delim(char, char *);
-
-/* more_functions2.c */
+/* more_functions.c */
 int _erratoi(char *);
 void print_error(param_t *, char *);
 int print_d(int, int);
